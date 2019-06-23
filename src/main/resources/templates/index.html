@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:utext="${title}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+</head>
+<body>
+    <div class="container">
+        <div class="container-fluid">
+            <br/>
+            <div class="page-header">
+                <h3 th:utext="${title}"></h3>
+            </div>
+            <br/>
+            <a th:href="@{/student/addStudent}" class="btn btn-primary">Add Student</a>
+            <br/>
+            <br/>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="student : ${students}">
+                        <td th:utext="${student.firstname}"></td>
+                        <td th:utext="${student.lastname}"></td>
+                        <td th:utext="${student.email}"></td>
+                        <td>
+                            <a th:href="@{/student/get/}+${student.studentId}" class="btn btn-primary">Update</a>
+                            <a href="" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
