@@ -1,5 +1,7 @@
 package com.dicka.examplerelationshiph2dbthymeleaf.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -18,6 +20,7 @@ public class Course implements Serializable{
     private String courserName;
 
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     private Set<Student> students = new HashSet<>();
 
     public Course(){}
