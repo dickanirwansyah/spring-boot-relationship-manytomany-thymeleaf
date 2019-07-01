@@ -1,9 +1,14 @@
 package com.dicka.examplerelationshiph2dbthymeleaf;
 
+import com.dicka.examplerelationshiph2dbthymeleaf.entity.Address;
 import com.dicka.examplerelationshiph2dbthymeleaf.entity.Course;
 import com.dicka.examplerelationshiph2dbthymeleaf.entity.Student;
+import com.dicka.examplerelationshiph2dbthymeleaf.entity.Teacher;
+import com.dicka.examplerelationshiph2dbthymeleaf.repository.AddressRepository;
 import com.dicka.examplerelationshiph2dbthymeleaf.repository.CourseRepository;
 import com.dicka.examplerelationshiph2dbthymeleaf.repository.StudentRepository;
+import com.dicka.examplerelationshiph2dbthymeleaf.repository.TeacherReposistory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +35,12 @@ class CommandLineRunnerData implements CommandLineRunner{
 	@Autowired
 	private StudentRepository studentRepository;
 
+	@Autowired
+	private TeacherReposistory teacherReposistory;
+
+	@Autowired
+	private AddressRepository addressRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -42,6 +54,30 @@ class CommandLineRunnerData implements CommandLineRunner{
 			}else{
 				System.out.println("notfound.");
 			}
+
+		}catch (NullPointerException e){
+			e.printStackTrace();
+		}
+
+		try{
+
+			Address address = new Address();
+			Teacher teacher = new Teacher();
+
+			address.setNo("address no 1");
+			address.setProvince("address province 1");
+			address.setZipcode("12430");
+			address.setStreet("address street 1");
+			address.setVillage("address vilage 1");
+
+
+			teacher.setName("teacher name 1");
+			teacher.setDob(new Date());
+			teacher.setAddress(address);
+
+			addressRepository.save(address);
+			teacherReposistory.save(teacher);
+
 
 		}catch (NullPointerException e){
 			e.printStackTrace();
